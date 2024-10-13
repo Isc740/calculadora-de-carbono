@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparador de Huella de Carbono</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="src/index.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="https://www.sena.edu.co">
+      <img src="img/logo-sena-negro-png-2022.png" alt="sena-logo" class="logo">
+    </a>
+    <h1>Comparador de Huella de Carbono</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="openTab('calculator')">Calculadora</a></li>
+      <li><a href="#" onclick="openTab('carbonFootprint')">¿Qué es la Huella de Carbono?</a></li>
+      <li><a href="#" onclick="openTab('importance')">Importancia de la Reducción</a></li>
+      <li><a href="#" onclick="openTab('caseStudies')">Casos de Estudio</a></li>
+      <li><a href="#" onclick="openTab('benefits')">Beneficios</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="calculator" class="tab-content">
+      <h2>Calculadora de Huella de Carbono</h2>
+      <div id="calculator-container">
+        <div class="input-group">
+          <label for="transportMode">Modo de transporte:</label>
+          <select id="transportMode">
+            <option value="car">Automóvil</option>
+            <option value="airplane">Avión</option>
+            <option value="bus">Autobús</option>
+            <option value="train">Tren</option>
+            <option value="bicycle">Bicicleta</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="distance">Distancia (km):</label>
+          <input type="number" id="distance" min="0" placeholder="Ingresa la distancia en km">
+        </div>
+        <button onclick="showCarbonFootprint()">Calcular</button>
+        <p id="result"></p>
+        <canvas id="carbonChart" width="500" height="500"></canvas>
+      </div>
+    </section>
+    <section id="carbonFootprint" class="tab-content">
+      <h2>¿Qué es la Huella de Carbono?</h2>
+      <h3>Definición General de la Huella de Carbono</h3>
+      <p>
+        La huella de carbono se refiere al total de emisiones de gases de efecto invernadero (GEI) generadas por
+        actividades humanas.
+        Estos gases, principalmente dióxido de carbono (CO₂), metano (CH₄) y óxidos de nitrógeno (NOₓ), son responsables
+        del calentamiento
+        global y el cambio climático. La huella de carbono de un individuo, producto o entidad se mide en términos de
+        CO₂ equivalente
+        (CO₂e) y refleja el impacto total que tiene sobre el medio ambiente.
+      </p>
+
+      <h3>Componentes de la Huella de Carbono</h3>
+      <p>
+        La huella de carbono abarca diferentes áreas de nuestras actividades diarias, que incluyen el transporte, la
+        energía que utilizamos,
+        la producción de alimentos, y la fabricación de productos y servicios. Los componentes principales de la huella
+        de carbono pueden
+        dividirse en dos categorías:
+      </p>
+      <ul>
+        <li>
+          <strong>Huella de Carbono Directa:</strong> Son las emisiones que provienen directamente de las actividades
+          que realizamos
+          personalmente. Ejemplos incluyen conducir un automóvil, usar electrodomésticos que consumen electricidad, o
+          calentar nuestras
+          viviendas con gas natural.
+        </li>
+        <li>
+          <strong>Huella de Carbono Indirecta:</strong> Se refiere a las emisiones generadas en la cadena de suministro
+          y producción de
+          los productos que consumimos. Incluye el CO₂ emitido durante la fabricación, transporte y distribución de
+          alimentos, ropa,
+          aparatos electrónicos, entre otros.
+        </li>
+      </ul>
+
+      <h3>Orígenes y Fuentes de Emisión</h3>
+      <p>
+        Las principales fuentes de emisión de gases de efecto invernadero responsables de la huella de carbono incluyen:
+      </p>
+      <ul>
+        <li>
+          <strong>Transporte:</strong> Los automóviles, aviones, autobuses y otros vehículos que utilizan combustibles
+          fósiles emiten
+          CO₂ como subproducto de la quema de gasolina y diésel. A nivel global, el transporte es responsable de una
+          parte significativa
+          de las emisiones de GEI.
+        </li>
+        <li>
+          <strong>Producción de Energía:</strong> El uso de electricidad generada a partir de fuentes no renovables,
+          como carbón y gas
+          natural, emite grandes cantidades de CO₂. Las plantas de energía que queman combustibles fósiles contribuyen
+          de manera importante
+          a la huella de carbono de los países y las industrias.
+        </li>
+        <li>
+          <strong>Agricultura y Ganadería:</strong> Las prácticas agrícolas emiten grandes cantidades de metano y óxidos
+          de nitrógeno, que
+          tienen un efecto invernadero mucho mayor que el CO₂. En particular, la cría de ganado produce metano a través
+          de la digestión de
+          los animales.
+        </li>
+        <li>
+          <strong>Industria y Manufactura:</strong> Las fábricas que producen bienes de consumo requieren enormes
+          cantidades de energía y,
+          a menudo, emiten CO₂ y otros gases durante el proceso de fabricación.
+        </li>
+      </ul>
+
+      <h3>Impacto de la Huella de Carbono en el Cambio Climático</h3>
+      <p>
+        La acumulación de gases de efecto invernadero en la atmósfera ha llevado al calentamiento global, que es el
+        aumento progresivo de
+        la temperatura media de la Tierra. Este fenómeno, a su vez, impulsa el cambio climático, lo que provoca una
+        mayor frecuencia de
+        fenómenos meteorológicos extremos, como huracanes, sequías, olas de calor y lluvias torrenciales.
+      </p>
+      <p>
+        Las actividades humanas, como la quema de combustibles fósiles para el transporte y la producción de
+        electricidad, han acelerado
+        el ritmo del cambio climático. Las emisiones de CO₂ contribuyen a un efecto invernadero intensificado, donde los
+        gases de efecto
+        invernadero atrapan el calor en la atmósfera y provocan un aumento en la temperatura de la superficie terrestre.
+      </p>
+
+      <h3>Cómo se Mide la Huella de Carbono</h3>
+      <p>
+        Existen varias formas de medir la huella de carbono, ya sea a nivel individual, empresarial o gubernamental. Los
+        métodos más
+        comunes incluyen:
+      </p>
+      <ul>
+        <li>
+          <strong>Calculadoras de Huella de Carbono:</strong> Son herramientas interactivas que permiten estimar el
+          impacto de nuestras
+          actividades diarias. Utilizan datos como el consumo de electricidad, el tipo de transporte utilizado y la
+          cantidad de desechos
+          producidos para proporcionar una estimación de las emisiones personales o organizacionales.
+        </li>
+        <li>
+          <strong>Evaluaciones de Ciclo de Vida (LCA):</strong> Estas evaluaciones calculan la huella de carbono total
+          de un producto o
+          servicio desde su creación hasta su eliminación, cubriendo todas las fases de producción, distribución, uso y
+          disposición final.
+        </li>
+        <li>
+          <strong>Análisis de Emisiones de Combustible:</strong> Este método mide las emisiones de CO₂ según el consumo
+          de combustible
+          en actividades como el transporte o la generación de electricidad.
+        </li>
+      </ul>
+
+      <h3>Consecuencias Ambientales y Sociales</h3>
+      <p>
+        La creciente huella de carbono de la humanidad tiene consecuencias graves no solo para el medio ambiente, sino
+        también para la
+        sociedad. Entre estas se encuentran:
+      </p>
+      <ul>
+        <li>
+          <strong>Desglaciación:</strong> El calentamiento global ha acelerado el derretimiento de los glaciares y las
+          capas de hielo
+          en el Ártico y la Antártida, lo que ha provocado el aumento del nivel del mar. Esto pone en riesgo a las
+          ciudades costeras y a
+          las comunidades cercanas a los océanos.
+        </li>
+        <li>
+          <strong>Pérdida de Biodiversidad:</strong> El cambio climático ha alterado los hábitats de muchas especies,
+          forzándolas a
+          adaptarse o migrar. Aquellas que no pueden adaptarse a las nuevas condiciones enfrentan un mayor riesgo de
+          extinción.
+        </li>
+        <li>
+          <strong>Desplazamientos Humanos:</strong> Las sequías, inundaciones y tormentas extremas resultantes del
+          cambio climático
+          están obligando a millones de personas a abandonar sus hogares, lo que incrementa las tensiones sociales y
+          políticas en muchas
+          regiones del mundo.
+        </li>
+        <li>
+          <strong>Salud Pública:</strong> El aumento de las temperaturas y la mala calidad del aire están vinculados a
+          un aumento en
+          problemas de salud, como enfermedades respiratorias y cardiovasculares. Además, la propagación de enfermedades
+          infecciosas
+          ha crecido en áreas afectadas por fenómenos climáticos extremos.
+        </li>
+      </ul>
+
+      <h3>Cómo Reducir la Huella de Carbono</h3>
+      <p>
+        Reducir nuestra huella de carbono es esencial para mitigar el cambio climático y minimizar sus efectos
+        negativos. Algunas acciones
+        clave que podemos tomar incluyen:
+      </p>
+      <ul>
+        <li>
+          <strong>Uso de Transporte Sostenible:</strong> Optar por caminar, andar en bicicleta, usar transporte público
+          o cambiar a vehículos
+          eléctricos son formas efectivas de reducir las emisiones relacionadas con el transporte.
+        </li>
+        <li>
+          <strong>Eficiencia Energética:</strong> Adoptar medidas como el uso de bombillas LED, electrodomésticos de
+          bajo consumo y la
+          instalación de paneles solares puede reducir significativamente el consumo de energía en los hogares.
+        </li>
+        <li>
+          <strong>Consumo Responsable:</strong> Comprar productos locales y de temporada, reducir el desperdicio de
+          alimentos y reciclar
+          son formas de minimizar la huella de carbono indirecta asociada con la producción y el transporte de bienes.
+        </li>
+        <li>
+          <strong>Reforestación:</strong> Plantar árboles ayuda a capturar el CO₂ atmosférico, lo que puede compensar
+          parte de las
+          emisiones generadas por nuestras actividades diarias.
+        </li>
+      </ul>
+    </section>
+    <section id="importance" class="tab-content">
+      <h2>Importancia de la Reducción de la Huella de Carbono</h2>
+      <p>
+        La huella de carbono es una medida crítica del impacto ambiental que cada persona, industria o actividad tiene
+        en el planeta. Cada acción, desde encender una luz hasta producir alimentos, contribuye de manera directa o
+        indirecta al cambio climático. Este fenómeno global está vinculado a un aumento en la temperatura de la Tierra y
+        la exacerbación de fenómenos climáticos extremos como huracanes, sequías e inundaciones.
+      </p>
+      <p>
+        El cambio climático provocado por las emisiones de gases de efecto invernadero, principalmente dióxido de
+        carbono (CO₂), está alterando ecosistemas, provocando extinciones masivas, afectando la seguridad alimentaria y
+        poniendo en riesgo a millones de personas que viven en zonas costeras. Para mitigar estos efectos, es
+        fundamental que reduzcamos nuestra huella de carbono a través de cambios tanto a nivel personal como a nivel
+        global.
+      </p>
+      <h3>Consecuencias Ambientales del Aumento de CO₂</h3>
+      <p>
+        El incremento de CO₂ en la atmósfera contribuye al calentamiento global, lo que tiene efectos catastróficos en
+        los ecosistemas. Los glaciares se están derritiendo a un ritmo alarmante, lo que eleva el nivel del mar y
+        amenaza a comunidades costeras. Además, los océanos están absorbiendo una parte significativa de este CO₂, lo
+        que resulta en la acidificación del agua y la destrucción de los arrecifes de coral, que son esenciales para la
+        biodiversidad marina.
+      </p>
+      <p>
+        Las temperaturas más cálidas también están afectando los patrones de las estaciones, causando sequías
+        prolongadas en algunas regiones y precipitaciones extremas en otras. Esto tiene implicaciones directas para la
+        agricultura, ya que la producción de alimentos se ve afectada por las condiciones climáticas impredecibles.
+      </p>
+      <h3>Acciones para Reducir la Huella de Carbono</h3>
+      <p>
+        Reducir la huella de carbono implica cambios en varios aspectos de la vida diaria. A nivel personal, una de las
+        formas más efectivas es modificar los hábitos de transporte. Optar por medios de transporte sostenibles, como el
+        uso de la bicicleta o el transporte público, reduce significativamente las emisiones de CO₂. También es
+        importante reducir el consumo de energía en el hogar a través del uso de electrodomésticos eficientes y apagando
+        luces y aparatos cuando no estén en uso.
+      </p>
+      <p>
+        En el ámbito industrial, muchas empresas están adoptando prácticas más sostenibles, como el uso de energías
+        renovables y la mejora de la eficiencia energética en sus procesos de producción. Sin embargo, para que estas
+        acciones sean efectivas, es necesario el apoyo gubernamental a través de políticas públicas que incentiven la
+        reducción de emisiones y promuevan el desarrollo de tecnologías limpias.
+      </p>
+      <p>
+        Además, las decisiones alimentarias tienen un impacto considerable en la huella de carbono. Reducir el consumo
+        de productos animales, que requieren grandes cantidades de recursos para su producción, puede disminuir
+        significativamente las emisiones globales de CO₂. Optar por dietas basadas en plantas y reducir el desperdicio
+        de alimentos son acciones clave que cada persona puede tomar.
+      </p>
+      <h3>Importancia de la Educación y la Conciencia</h3>
+      <p>
+        La educación y la conciencia son fundamentales para lograr una reducción sostenida de la huella de carbono.
+        Informar a las personas sobre cómo sus acciones diarias afectan el medio ambiente permite que adopten prácticas
+        más sostenibles. Las campañas de sensibilización ambiental, tanto en escuelas como en comunidades, juegan un
+        papel crucial en este proceso.
+      </p>
+      <p>
+        De manera general, el cambio hacia un estilo de vida más sostenible es clave para asegurar que las futuras
+        generaciones puedan disfrutar de un planeta habitable. Cada pequeño cambio contribuye a un esfuerzo colectivo
+        para frenar los efectos devastadores del cambio climático.
+      </p>
+    </section>
+    <section id="caseStudies" class="tab-content">
+      <h2>Casos de Estudio de Reducción de Huella de Carbono</h2>
+
+      <h3>Caso 1: Suecia y la Transición hacia Energías Renovables</h3>
+      <p>
+        Suecia es un líder mundial en la transición hacia una economía baja en carbono. Desde la década de 1970, el país
+        ha invertido fuertemente en energía hidroeléctrica y nuclear, lo que ha reducido su dependencia de los
+        combustibles fósiles. Actualmente, más del 50% de la energía consumida en Suecia proviene de fuentes renovables,
+        y el país tiene como objetivo ser neutral en carbono para 2045. Además, Suecia ha impuesto altos impuestos sobre
+        las emisiones de carbono, incentivando a las empresas y ciudadanos a adoptar prácticas más sostenibles.
+      </p>
+
+      <h3>Caso 2: Copenhague - Hacia una Ciudad Neutral en Carbono</h3>
+      <p>
+        Copenhague, la capital de Dinamarca, se ha fijado el ambicioso objetivo de convertirse en la primera capital del
+        mundo neutral en carbono para 2025. La ciudad ha implementado una serie de iniciativas, como la mejora de la
+        infraestructura para bicicletas, la ampliación de la red de transporte público eléctrico y la inversión en
+        edificios de energía eficiente. Además, el uso de energía eólica y solar ha aumentado considerablemente, lo que
+        ha permitido a la ciudad reducir significativamente sus emisiones.
+      </p>
+
+      <h3>Caso 3: Tesla - Liderando la Revolución de los Vehículos Eléctricos</h3>
+      <p>
+        Tesla, una de las empresas más innovadoras en el sector automotriz, ha revolucionado la industria del transporte
+        con sus vehículos eléctricos. La misión de Tesla es acelerar la transición del mundo hacia la energía
+        sostenible, y lo ha logrado con el desarrollo de vehículos eléctricos de alto rendimiento y bajo impacto
+        ambiental. A través de sus tecnologías de baterías, Tesla también ha facilitado el almacenamiento de energía
+        renovable para hogares y empresas, ayudando a reducir la dependencia de los combustibles fósiles.
+      </p>
+
+      <h3>Caso 4: Proyectos de Reforestación en el Amazonas</h3>
+      <p>
+        La deforestación es una de las principales causas del aumento de las emisiones de carbono, y los proyectos de
+        reforestación son una solución clave para revertir este daño. Varios países sudamericanos, en colaboración con
+        organizaciones internacionales, están llevando a cabo proyectos de reforestación en la selva amazónica. Estas
+        iniciativas no solo ayudan a capturar CO₂ de la atmósfera, sino que también restauran los ecosistemas y protegen
+        la biodiversidad.
+      </p>
+
+      <h3>Caso 5: Google y la Neutralidad de Carbono</h3>
+      <p>
+        Google se convirtió en una de las primeras grandes empresas tecnológicas en alcanzar la neutralidad de carbono
+        en 2007. A través de la compra de energía renovable y la inversión en eficiencia energética en sus centros de
+        datos, la empresa ha logrado reducir sus emisiones a casi cero. Además, Google ha desarrollado programas de
+        inteligencia artificial para optimizar el uso de energía en sus instalaciones, lo que ha permitido reducir aún
+        más su huella de carbono.
+      </p>
+
+      <h3>Caso 6: Proyecto de Energía Solar en India</h3>
+      <p>
+        India, uno de los países más poblados del mundo, ha tomado medidas audaces para reducir su dependencia de los
+        combustibles fósiles a través de proyectos de energía solar. Uno de los mayores proyectos solares del mundo, el
+        Parque Solar de Bhadla, está ubicado en el estado de Rajastán y tiene una capacidad instalada de más de 2,245
+        megavatios. Este proyecto es un paso importante hacia el objetivo de India de obtener el 40% de su electricidad
+        de fuentes renovables para 2030.
+      </p>
+
+      <h3>Conclusión: El Futuro de la Reducción de la Huella de Carbono</h3>
+      <p>
+        Estos casos de estudio muestran cómo diferentes actores en todo el mundo están tomando medidas significativas
+        para reducir la huella de carbono. Desde gobiernos hasta empresas privadas e iniciativas locales, cada esfuerzo
+        contribuye a la lucha global contra el cambio climático. A medida que más personas y organizaciones adopten
+        estrategias para reducir sus emisiones, el impacto colectivo será mayor, ayudando a mitigar los efectos del
+        calentamiento global y a proteger el medio ambiente para las generaciones futuras.
+      </p>
+    </section>
+    <section id="benefits" class="tab-content">
+      <h2>Beneficios Ambientales de la Reducción de Emisiones</h2>
+      <h3>1. Mitigación del Calentamiento Global</h3>
+      <p>
+        La reducción de las emisiones de gases de efecto invernadero, especialmente el dióxido de carbono (CO₂), es
+        clave para frenar el calentamiento global. Al reducir la cantidad de CO₂ en la atmósfera, disminuimos el efecto
+        invernadero que atrapa el calor, evitando un mayor aumento de las temperaturas globales. Esto ayuda a
+        estabilizar los patrones climáticos y reduce la frecuencia e intensidad de fenómenos extremos como huracanes,
+        sequías e inundaciones.
+      </p>
+
+      <h3>2. Conservación de Ecosistemas y Biodiversidad</h3>
+      <p>
+        La reducción de emisiones contribuye a la protección de ecosistemas críticos como selvas, océanos y zonas
+        polares. Los ecosistemas más frágiles, como los arrecifes de coral y los bosques tropicales, son extremadamente
+        sensibles a los cambios de temperatura. Reducir las emisiones ralentiza el cambio climático y les da una mayor
+        oportunidad de adaptación. Además, la disminución de la acidificación oceánica, causada por la absorción de CO₂,
+        beneficia directamente a la vida marina.
+      </p>
+
+      <h3>3. Mejora de la Calidad del Aire</h3>
+      <p>
+        Al reducir la quema de combustibles fósiles, no solo se disminuyen las emisiones de CO₂, sino también las
+        emisiones de contaminantes peligrosos como el dióxido de azufre (SO₂) y el óxido de nitrógeno (NOx). Estos
+        contaminantes contribuyen a la formación de smog y lluvia ácida, afectando la salud de los seres vivos y dañando
+        los ecosistemas. La mejora en la calidad del aire reduce el daño a los suelos, las plantas y los cuerpos de
+        agua.
+      </p>
+
+      <h3>4. Protección de los Recursos Hídricos</h3>
+      <p>
+        La reducción de emisiones también contribuye a la conservación de los recursos hídricos. El calentamiento global
+        provoca que los glaciares y casquetes polares se derritan, lo que incrementa el nivel del mar y puede contaminar
+        las fuentes de agua dulce. Al reducir las emisiones y frenar el aumento de las temperaturas, protegemos el
+        suministro de agua dulce y evitamos que se agoten los acuíferos y lagos naturales.
+      </p>
+
+      <h3>5. Prevención de la Desertificación</h3>
+      <p>
+        La desertificación, o la transformación de tierras fértiles en desiertos, es otro efecto negativo del cambio
+        climático que puede prevenirse con la reducción de emisiones. Las temperaturas más elevadas y los cambios en los
+        patrones de precipitación aumentan la probabilidad de sequías prolongadas, que aceleran la desertificación. Al
+        reducir las emisiones, se ayuda a estabilizar los ecosistemas terrestres y a mantener los suelos productivos.
+      </p>
+
+      <h3>6. Fomento de Tecnologías Limpias e Innovación</h3>
+      <p>
+        Las políticas y acciones orientadas a la reducción de emisiones impulsan el desarrollo de tecnologías limpias,
+        como las energías renovables (solar, eólica, hidroeléctrica) y los vehículos eléctricos. Estas tecnologías no
+        solo reducen la contaminación, sino que también crean nuevos empleos verdes y mejoran la competitividad
+        económica a largo plazo. Fomentar la innovación en tecnologías sostenibles es clave para reducir la dependencia
+        de los combustibles fósiles y avanzar hacia una economía más verde.
+      </p>
+
+      <h3>7. Restauración y Preservación de Bosques</h3>
+      <p>
+        La reforestación y conservación de los bosques son componentes esenciales en la reducción de emisiones, ya que
+        los árboles actúan como sumideros de carbono, absorbiendo grandes cantidades de CO₂ de la atmósfera. Invertir en
+        la protección y restauración de los bosques no solo reduce las emisiones, sino que también protege la
+        biodiversidad, mejora la calidad del suelo y combate la erosión.
+      </p>
+
+      <h3>8. Protección de los Océanos</h3>
+      <p>
+        Los océanos absorben una gran parte del CO₂ emitido por las actividades humanas. Sin embargo, este proceso
+        acidifica los océanos, dañando los corales, moluscos y otros organismos marinos. Reducir las emisiones de
+        carbono ayuda a estabilizar la química de los océanos, preservando la vida marina y asegurando la salud de las
+        pesquerías, que son una fuente vital de alimento y empleo en todo el mundo.
+      </p>
+
+      <h3>9. Reducción del Estrés en la Fauna y Flora</h3>
+      <p>
+        Los cambios rápidos en el clima estresan a las especies animales y vegetales, que muchas veces no pueden
+        adaptarse con la suficiente rapidez a los nuevos entornos. La reducción de las emisiones permite frenar el ritmo
+        del cambio climático, dándole más tiempo a las especies para adaptarse y reduciendo el riesgo de extinción
+        masiva. Esto es esencial para mantener los equilibrios ecológicos en los diferentes hábitats naturales.
+      </p>
+
+      <h3>Conclusión</h3>
+      <p>
+        La reducción de emisiones tiene numerosos beneficios ambientales a corto y largo plazo. Desde la mitigación del
+        cambio climático hasta la protección de ecosistemas y la promoción de tecnologías limpias, cada acción cuenta
+        para garantizar un planeta más saludable. A medida que más países, empresas y personas se sumen a los esfuerzos
+        de reducción, los impactos positivos se amplificarán, ayudando a preservar el equilibrio ecológico del planeta y
+        protegiendo su biodiversidad.
+      </p>
+    </section>
+  </main>
+  <footer>
+    <h3>Estudiantes</h3>
+    <p>
+      ADSO - 2998937<br>
+      Issac David Cantillo Julio<br>
+      Esteban De Jesús Mesino Severiche<br>
+      Jailer de Jesús Lara Pineda
+    </p>
+
+    <h3>Referencias</h3>
+    <ul>
+      <li><a href="https://pubs.acs.org/doi/10.1021/es703112w">The Importance of Carbon Footprint Estimation
+          Boundaries</a></li>
+      <li><a
+          href="https://www.eea.europa.eu/publications/transport-and-environment-report-2022/transport-and-environment-report/view">Transport
+          and Environment Report 2022</a></li>
+      <li><a href="https://www.eea.europa.eu/">Agencia Europea de Medio Ambiente (EEA)</a></li>
+      <li><a href="https://www.ipcc.ch/">Panel Intergubernamental sobre Cambio Climático (IPCC)</a></li>
+      <li><a href="https://www.carbonfootprint.com/">CarbonFootprint.com</a></li>
+    </ul>
+  </footer>
+</body>
+
+</html>
